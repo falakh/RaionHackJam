@@ -6,7 +6,6 @@ public class PlayerData : MonoBehaviour
     public static void addCoin(int a)
     {
         Debug.Log("sebelum "+getKoin());
-        PlayerPrefs.DeleteKey("koin");
         PlayerPrefs.SetInt("koin", getKoin()+a);
         Debug.Log("sesudah"+getKoin());
     }
