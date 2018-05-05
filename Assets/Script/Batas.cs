@@ -10,7 +10,6 @@ public class Batas : MonoBehaviour
         {
             if (!SinggleRope.back) { 
                 Destroy(collision.gameObject);
-
             }
         }
         {

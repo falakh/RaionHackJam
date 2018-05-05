@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(BoxCollider2D), typeof(HingeJoint2D), typeof(FixedJoint2D))]
 public class HeadRope : MonoBehaviour {
+    private int childCount=0;
+    public int maxChild;
     private Vector2 destiny;
     private bool canMove,back,completed=true;
     public int speed;
@@ -15,6 +17,7 @@ public class HeadRope : MonoBehaviour {
     private void Start()
     {
         //hooker = GameObject.FindGameObjectWithTag("Hooker");
+        GetComponent<FixedJoint2D>().enabled = false;
         lastNode = transform.gameObject;
         lastNode.AddComponent<SinggleRope>();
     }
@@ -56,14 +59,33 @@ public class HeadRope : MonoBehaviour {
         }
        
 	}
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (collision.gameObject.GetComponent<EnemyControler>() != null && childCount<=maxChild)
+        {
+            Debug.Log("hit enemy");
+          
+           
+                collision.transform.SetParent(transform);
+                collision.gameObject.GetComponent<EnemyControler>().stop();
+                Debug.Log("enemy atach");
+            childCount++;
+
+        }
+    }
 
     void addSinggeleRope()
     {
         Transform[] temp = GetComponentsInChildren<Transform>();
         for(int i=0; i < temp.Length; i++)
         {
-            if(temp[i].GetComponent<SinggleRope>()==null)
-            temp[i].gameObject.AddComponent<SinggleRope>();
+            if (temp[i].GetComponent<SinggleRope>() == null)
+            {
+                temp[i].gameObject.AddComponent<SinggleRope>();
+            }
+            
         }
     }
 
@@ -81,13 +103,7 @@ public class HeadRope : MonoBehaviour {
 
     }
    
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.GetComponent<Batas>()!=null)
-        {
-            Destroy(collision.gameObject);
-        }
-    }
+    
 
     private void moveTo(Vector2 target)
     {
@@ -111,6 +127,7 @@ public class HeadRope : MonoBehaviour {
     }
     public static bool isExist()
     {
+        Debug.Log(exist);
         return exist;
     }
 }

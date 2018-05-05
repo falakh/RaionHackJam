@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(CircleCollider2D),typeof(HingeJoint2D))]
 public class SinggleRope : MonoBehaviour
 {
     [HideInInspector]
@@ -14,4 +14,5 @@ public class SinggleRope : MonoBehaviour
     {
         Destroy(gameObject);
     }
+  
 }
