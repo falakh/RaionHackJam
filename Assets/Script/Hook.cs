@@ -25,7 +25,6 @@ public class Hook : MonoBehaviour
         {
             follow = false;
             rotateHook(transform.position);
-           
         }
     }
     private void rotateHook(Vector3 target)

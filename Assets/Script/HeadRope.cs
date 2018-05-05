@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SinggleRope : MonoBehaviour {
+public class HeadRope : MonoBehaviour {
     private Vector2 destiny;
-    private bool canMove,back;
+    private bool canMove,back,completed=true;
     public int speed;
     private Vector2 startPos;
     public float distance;
     public GameObject nodePrefab;
     public GameObject hooker;
     private GameObject lastNode;
-
+    private static bool exist;
     private void Start()
     {
         //hooker = GameObject.FindGameObjectWithTag("Hooker");
         lastNode = transform.gameObject;
+        lastNode.AddComponent<SinggleRope>();
     }
     // Update is called once per frame
     void Update () {
@@ -32,21 +33,39 @@ public class SinggleRope : MonoBehaviour {
             }
             else
             {
-                if (back)
-                { 
+                back = true;
+                if (Input.GetMouseButton(0))
+                {
                     moveTo(startPos);
                 }
-                else
+                if (SinggleRope.back)
                 {
-                    back = true;
-                    lastNode.GetComponent<HingeJoint2D>().connectedBody = hooker.GetComponent<Rigidbody2D>();
-
+                    SinggleRope.back = false;
+                    
                 }
+                if (completed)
+                {
+                    addSinggeleRope();
+                    completed = false;
+                }
+             lastNode.GetComponent<HingeJoint2D>().connectedBody = hooker.GetComponent<Rigidbody2D>();
+
+
             }
             
         }
        
 	}
+
+    void addSinggeleRope()
+    {
+        Transform[] temp = GetComponentsInChildren<Transform>();
+        for(int i=0; i < temp.Length; i++)
+        {
+            if(temp[i].GetComponent<SinggleRope>()==null)
+            temp[i].gameObject.AddComponent<SinggleRope>();
+        }
+    }
 
     void createNode()
     {
@@ -61,9 +80,10 @@ public class SinggleRope : MonoBehaviour {
 
 
     }
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Finish")
+        if(collision.gameObject.GetComponent<Batas>()!=null)
         {
             Destroy(collision.gameObject);
         }
@@ -75,9 +95,22 @@ public class SinggleRope : MonoBehaviour {
     }
     public void setDestiny(Vector2 tujuan,Vector2 start)
     {
+
         this.destiny = tujuan;
         this.startPos = start;
         canMove = true;
         back = false;
+    }
+    private void OnDestroy()
+    {
+        exist = false;
+    }
+    private void OnBecameInvisible()
+    {
+        moveTo(startPos);   
+    }
+    public static bool isExist()
+    {
+        return exist;
     }
 }
