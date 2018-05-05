@@ -40,10 +40,15 @@ public class DirectionSystem : MonoBehaviour {
 
     private void shoot()
     {
-        GameObject temp = Instantiate(bullet, startPosition, Quaternion.identity);
-        temp.AddComponent<SinggleRope>();
-        temp.GetComponent<SinggleRope>().setDestiny(destiny, startPosition);
-        temp.GetComponent<SinggleRope>().speed = 10;
+        if (!HeadRope.isExist())
+        {
+            GameObject temp = Instantiate(bullet, startPosition, Quaternion.identity);
+            temp.AddComponent<HeadRope>();
+            temp.AddComponent<SinggleRope>();
+            temp.GetComponent<HeadRope>().setDestiny(destiny, transform.position);
+            temp.GetComponent<HeadRope>().speed = 10;
+        }
+        
     }
  
 
