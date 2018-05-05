@@ -23,9 +23,11 @@ public class EnemySpawn : MonoBehaviour {
 	}
 
 	void SpawnEnemy(){
+
 		GameObject anEnemy =(GameObject)Instantiate (enemies[Random.Range(0,enemies.Length)],new Vector3 (transform.position.x, Random.Range(-1.7f,1.7f),0),Quaternion.identity);
 		Vector2 position = transform.position;
 		position = new Vector2 (transform.position.x, transform.position.y);
+
 		ScheduleNextEnemySpawn ();
 	}
 
