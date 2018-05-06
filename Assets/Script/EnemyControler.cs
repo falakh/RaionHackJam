@@ -7,6 +7,10 @@ public class EnemyControler : MonoBehaviour {
 	public float speed;
     private bool destroyed=false;
     public int koin;
+<<<<<<< HEAD
+	private TimeManager timer;
+=======
+>>>>>>> 33a98cd9b6cfedcfe048e97a0846845b16a42bc3
     void Update () {
 		Vector2 position = transform.position;
 		position = new Vector2 (transform.position.x + speed * Time.deltaTime, transform.position.y);
@@ -15,6 +19,10 @@ public class EnemyControler : MonoBehaviour {
         {
             destroyed = true;
             Destroy(gameObject);
+<<<<<<< HEAD
+	
+=======
+>>>>>>> 33a98cd9b6cfedcfe048e97a0846845b16a42bc3
         }
 			
 	}
@@ -27,6 +35,10 @@ public class EnemyControler : MonoBehaviour {
         if (!destroyed)
         {
             PlayerData.addCoin(koin);
+<<<<<<< HEAD
+			TimeManager.addTime ();
+=======
+>>>>>>> 33a98cd9b6cfedcfe048e97a0846845b16a42bc3
         }
         
     }
