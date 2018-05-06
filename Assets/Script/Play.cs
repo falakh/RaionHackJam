@@ -5,10 +5,6 @@ public class Play : MonoBehaviour
 {
     public Animator animasi;
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void play()
     {
         animasi.SetBool("prees", true);
@@ -16,9 +12,17 @@ public class Play : MonoBehaviour
     public void goToPlay()
     {
         play();
-        Debug.Log("press");
-        //    SceneManager.LoadScene(0);
+        StartCoroutine(Example());
+        SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
 
+
+    }
+    IEnumerator Example()
+    {
+        do
+        {
+            yield return null;
+        } while (!animasi.GetCurrentAnimatorStateInfo(0).IsName("end"));
 
     }
 }
