@@ -1,8 +1,16 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
+guid: fa0b26d2ce3e64646ac4344a2b1c4052
+timeCreated: 1525536419
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+=======
 guid: 6d25d07ff770a8e49938532489ab3fb5
 timeCreated: 1525533489
 licenseType: Free
 MonoImporter:
+>>>>>>> origin/GamePlay
   serializedVersion: 2
   defaultReferences: []
   executionOrder: 0
