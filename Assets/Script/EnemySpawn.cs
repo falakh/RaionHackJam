@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour {
 	public GameObject[] enemies;
+	public Vector3 start, end;
+	private float rarity;
 
 	//public float speed;
 	//public GameObject pointSpawn;
@@ -19,15 +21,23 @@ public class EnemySpawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		rarity = Random.Range (1, 100);
 		
 	}
 
 	void SpawnEnemy(){
+		if (rarity > 10) {
+			GameObject anEnemy = (GameObject)Instantiate (enemies [Random.Range (1, enemies.Length)], new Vector3 (transform.position.x, Random.Range (start.y, end.y), 0), Quaternion.identity);
+			Vector2 position = transform.position;
+			position = new Vector2 (transform.position.x, transform.position.y);
 
-		GameObject anEnemy =(GameObject)Instantiate (enemies[Random.Range(0,enemies.Length)],new Vector3 (transform.position.x, Random.Range(-1.7f,1.7f),0),Quaternion.identity);
-		Vector2 position = transform.position;
-		position = new Vector2 (transform.position.x, transform.position.y);
-
+		}
+		else{
+			GameObject anEnemy =(GameObject)Instantiate (enemies[0],new Vector3 (transform.position.x, Random.Range(start.y,end.y),0),Quaternion.identity);
+			Vector2 position = transform.position;
+			position = new Vector2 (transform.position.x, transform.position.y);
+		
+		}
 		ScheduleNextEnemySpawn ();
 	}
 

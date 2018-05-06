@@ -7,7 +7,6 @@ public class EnemyControler : MonoBehaviour {
 	public float speed;
     private bool destroyed=false;
     public int koin;
-	private TimeManager timer;
     void Update () {
 		Vector2 position = transform.position;
 		position = new Vector2 (transform.position.x + speed * Time.deltaTime, transform.position.y);
@@ -16,7 +15,6 @@ public class EnemyControler : MonoBehaviour {
         {
             destroyed = true;
             Destroy(gameObject);
-	
         }
 			
 	}

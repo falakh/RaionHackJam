@@ -51,8 +51,9 @@ public class HeadRope : MonoBehaviour {
                     addSinggeleRope();
                     completed = false;
                 }
-             lastNode.GetComponent<HingeJoint2D>().connectedBody = hooker.GetComponent<Rigidbody2D>();
-
+				if (lastNode != null) {
+					lastNode.GetComponent<HingeJoint2D> ().connectedBody = hooker.GetComponent<Rigidbody2D> ();
+				}
 
             }
             

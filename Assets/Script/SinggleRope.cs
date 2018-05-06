@@ -6,6 +6,12 @@ public class SinggleRope : MonoBehaviour
     [HideInInspector]
     public static bool back;
 
+	public void start(){
+		if (Time.timeScale == 0) {
+			Destroy (gameObject);
+		}
+	}
+
     public static bool isBack()
     {
         return back;
